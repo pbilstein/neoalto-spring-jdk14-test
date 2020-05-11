@@ -1,0 +1,13 @@
+FROM ubuntu:19.10
+
+RUN apt-get update \
+  && DEBIAN_FRONTEND=noninteractive apt-get install -y --allow-unauthenticated --no-install-recommends \
+    openjdk-13-jdk
+
+COPY ./ /opt
+
+WORKDIR /opt
+
+ENV GRADLE_USER_HOME=/tmp
+
+CMD ["./gradlew", "clean", "bootrun"]
